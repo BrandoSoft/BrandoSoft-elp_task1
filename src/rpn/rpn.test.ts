@@ -1,7 +1,7 @@
 import { rpn } from "./rpn";
 
 describe("rpn()", () => {
-    it("returs number when passed", () => {
+    it("returns number when passed", () => {
       expect(rpn("2")).toBe(2);
     });
 
