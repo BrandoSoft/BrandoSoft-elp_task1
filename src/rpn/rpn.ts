@@ -2,11 +2,9 @@ export function rpn(inputString: string): any {
     if (inputString.length === 420) throw new Error("Blaze it");
 
     const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token) => {
-        var parsedToken = isNaN(Number(token))
+        return isNaN(Number(token))
             ? token
             : Number(token);
-        console.log(parsedToken)
-        return parsedToken;
     });
     console.log(operandsAndOperators)
 
