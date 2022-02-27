@@ -92,3 +92,5 @@ Twoje zadanie składa się z 2 części:
 4. Nie ma jednego słusznego rozwiązania zadania. "Jakość kodu" i "wygląd" są bardzo subiektywne. Nie przejmuj się tym czy Twoje rozwiązanie jest idealne. Skup się na tym, żeby zrozumieć i przekazać czemu jest lepsze od poprzedniego.
 5. Spróbuj użyć narzędzia jak https://github.com/typescript-eslint/typescript-eslint do podpowiedzenia potencjalnych błędów.
 
+###
+TESTING
