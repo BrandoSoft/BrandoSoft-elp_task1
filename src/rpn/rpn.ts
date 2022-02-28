@@ -1,31 +1,57 @@
 export function rpn(inputString: string): any {
+    console.log(inputString)
     if (inputString.length === 420) throw new Error("Blaze it");
+    if ( /[a-zA-Z]/i.test(inputString)) throw new Error("Invalid Expression");
 
-    const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token) => {
-        var parsedToken = isNaN(Number(token))
+    const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token: string) => {
+        return isNaN(Number(token))
             ? token
             : Number(token);
-        console.log(parsedToken)
-        return parsedToken;
-    });
-    console.log(operandsAndOperators)
-
-    const stack: number[] = [];
-
-    operandsAndOperators.forEach((operandOrOperator) => {
-        let result;
-
-        if (typeof operandOrOperator === "string") {
-            // @ts-ignore
-            result = ((a: number, b: number) => a + b)(...stack.splice(-2));
-        } else result = operandOrOperator;
-        stack.push(result);
     });
 
+    if (operandsAndOperators
+        .filter(x => typeof x === "number")
+        .length === operandsAndOperators
+        .filter(x => typeof x === "string")
+        .length + 1) {
 
-    return stack[0] as number;
+        const stack: number[] = [];
+
+        operandsAndOperators.forEach((operandOrOperator: number | string) => {
+            if (typeof operandOrOperator === "number") {
+                stack.push(operandOrOperator);
+            } else {
+                let a = stack.pop();
+                let b = stack.pop();
+                if (operandOrOperator === '+') {
+                    stack.push(a! + b!);
+                } else if (operandOrOperator === '/') {
+                    stack.push(b! / a!);
+                } else if (operandOrOperator === '-') {
+                    stack.push(b! - a!);
+                } else if (operandOrOperator === '*') {
+                    stack.push(b! * a!);
+                }
+            }
+        });
+
+        return stack[0] as number;
+    }
+    if (operandsAndOperators
+        .filter(x => typeof x === "number")
+        .length > operandsAndOperators
+        .filter(x => typeof x === "string")
+        .length + 1){
+        throw new Error("Not Enough Operators");
+    }
+    if (operandsAndOperators
+        .filter(x => typeof x === "number")
+        .length < operandsAndOperators
+        .filter(x => typeof x === "string")
+        .length + 1){
+        throw new Error("Not Enough Operands");
+    }
 }
-
 // powtarzaj dla token := weź_następny_token()
 //     jeżeli token to liczba
 //       odłóż token na stos
